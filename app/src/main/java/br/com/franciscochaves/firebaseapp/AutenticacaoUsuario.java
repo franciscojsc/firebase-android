@@ -32,9 +32,19 @@ public class AutenticacaoUsuario extends AppCompatActivity {
                         } else {//Erro ao cadastrar
                             Log.i("signIn", "Erro ao fazer login usuário!!!!");
                         }
-                        
+
                     }
                 });
+
+        //Desloga usuário
+        //firebaseAuth.signOut();
+
+        //Verifica usuário logado
+        if (firebaseAuth.getCurrentUser() != null) {
+            Log.i("verificaUsuario", "Usuário está logado!!! user: "+ firebaseAuth.getCurrentUser().getEmail());
+        } else {
+            Log.i("verificaUsuario", "Usuário não está logado!!!");
+        }
 
         //Cadastro
         /*firebaseAuth.createUserWithEmailAndPassword("francisco@franciscochaves.com.br", "francisco1234")
