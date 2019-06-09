@@ -21,8 +21,23 @@ public class AutenticacaoUsuario extends AppCompatActivity {
 
         firebaseAuth = FirebaseAuth.getInstance();
 
+        //Login do usuário
+        firebaseAuth.signInWithEmailAndPassword("francisco@franciscochaves.com.br", "francisco1234")
+                .addOnCompleteListener(AutenticacaoUsuario.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+
+                        if (task.isSuccessful()) {//Sucesso ao cadastrar
+                            Log.i("signIn", "Sucesso ao fazer login usuário!!!!");
+                        } else {//Erro ao cadastrar
+                            Log.i("signIn", "Erro ao fazer login usuário!!!!");
+                        }
+                        
+                    }
+                });
+
         //Cadastro
-        firebaseAuth.createUserWithEmailAndPassword("francisco@franciscochaves.com.br", "francisco1234")
+        /*firebaseAuth.createUserWithEmailAndPassword("francisco@franciscochaves.com.br", "francisco1234")
                 .addOnCompleteListener(AutenticacaoUsuario.this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -34,7 +49,7 @@ public class AutenticacaoUsuario extends AppCompatActivity {
                         }
 
                     }
-                });
+                });*/
 
     }
 }
