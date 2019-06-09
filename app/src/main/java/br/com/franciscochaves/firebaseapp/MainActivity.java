@@ -1,10 +1,15 @@
 package br.com.franciscochaves.firebaseapp;
 
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import br.com.franciscochaves.firebaseapp.model.Produto;
 import br.com.franciscochaves.firebaseapp.model.Usuario;
@@ -41,6 +46,21 @@ public class MainActivity extends AppCompatActivity {
         produto.setFabricante("HP");
 
         produtoReference.child("002").setValue(produto);
+
+
+        produtoReference = databaseReference.child("produto").child("002");
+        produtoReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                // o método será chamado sempre que os dados forem alterados
+                Log.i("FIREBASE", dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Se houver erro ao recuperar os dados no banco de dados
+            }
+        });
 
     }
 }
